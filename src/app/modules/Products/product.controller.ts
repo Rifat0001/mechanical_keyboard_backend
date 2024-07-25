@@ -14,13 +14,22 @@ const createProduct = catchAsync(async (req, res) => {
 })
 
 const getAllProduct = catchAsync(async (req, res) => {
-  const result = await productService.getAllProductFromDb();
-  sendResponse(res, {
-    statusCode: httpStatus.OK,
-    success: true,
-    message: 'Products fetch successfully.',
-    data: result,
-  });
+  const result = await productService.getAllProductFromDb(req.query);
+  if (result.length === 0) {
+    sendResponse(res, {
+      statusCode: httpStatus.OK,
+      success: true,
+      message: 'No Product Found! ',
+      data: result,
+    });
+  } else {
+    sendResponse(res, {
+      statusCode: httpStatus.OK,
+      success: true,
+      message: 'Products fetch successfully.',
+      data: result,
+    });
+  }
 })
 
 const getSingleProduct = catchAsync(async (req, res) => {
