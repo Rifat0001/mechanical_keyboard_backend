@@ -31,8 +31,7 @@ const getAllProductFromDb = async (query: Record<string, unknown>) => {
   } else if (sort === 'priceHighToLow') {
     sortOptions = { price: -1 };
   }
-
-  const result = await searchQuery.sort(sortOptions).exec();
+  const result = (await searchQuery.sort({ $natural: -1 }).sort(sortOptions).exec());
   return result;
 };
 
