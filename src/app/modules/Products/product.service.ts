@@ -1,6 +1,7 @@
 import { TProduct } from "./product.interface";
 import { Product } from "./product.model";
 
+// create product 
 const createProductIntoDb = async (payload: TProduct) => {
   const result = await Product.create(payload);
   return result;
@@ -36,11 +37,13 @@ const getAllProductFromDb = async (query: Record<string, unknown>) => {
   return result;
 };
 
+// get single product 
 const getSingleProductFromDb = async (productId: string) => {
   const result = await Product.findById(productId);
   return result;
 }
 
+// update product 
 const updateProductIntoDb = async (productId: string, product: Partial<TProduct>) => {
   const result = await Product.findByIdAndUpdate(
     productId,
@@ -52,6 +55,7 @@ const updateProductIntoDb = async (productId: string, product: Partial<TProduct>
   return result;
 }
 
+// delete product 
 const deleteProductFromDb = async (productId: string) => {
   const result = await Product.findByIdAndDelete(productId);
   return result;
